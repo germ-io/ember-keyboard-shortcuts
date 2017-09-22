@@ -66,7 +66,7 @@ export default function(bindEvent, unbindEvent) {
 
     unbindShortcuts: Ember.on(unbindEvent, function() {
       this.mousetraps.forEach(
-        (mousetrap) => mousetrap.reset()
+        (mousetrap) => mousetrap.destroy()
       );
     })
 

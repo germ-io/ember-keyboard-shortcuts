@@ -16,7 +16,7 @@ export default function(bindEvent, unbindEvent) {
 
       Object.keys(shortcuts).forEach(function(shortcut) {
         var actionObject   = shortcuts[shortcut];
-        var mousetrap      = new Mousetrap(document.body);
+        var mousetrap;
         var preventDefault = true;
 
         function invokeAction(action, eventType) {
@@ -47,6 +47,8 @@ export default function(bindEvent, unbindEvent) {
             }
           } else if (actionObject.targetElement) {
             mousetrap = new Mousetrap(actionObject.targetElement);
+          } else {
+            mousetrap = new Mousetrap(document.body);
           }
 
           if (actionObject.preventDefault === false) {
@@ -55,6 +57,7 @@ export default function(bindEvent, unbindEvent) {
 
           invokeAction(actionObject.action, actionObject.eventType);
         } else {
+          mousetrap = new Mousetrap(document.body);
           invokeAction(actionObject);
         }
 
@@ -68,6 +71,7 @@ export default function(bindEvent, unbindEvent) {
       this.mousetraps.forEach(
         (mousetrap) => mousetrap.destroy()
       );
+      this.mousetraps = [];
     })
 
   });
